@@ -1,0 +1,10 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+<body>
+
+<div th:fragment="skills (skill, width)">
+    <span class="skill-name" th:text="${skill}">Skill Name</span>
+    <span class="skill-bar"><span class="skill-level" th:style="${'width: '+ width + '%'}"></span></span>
+</div>
+
+</body>
+</html>

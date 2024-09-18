@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Description of the document" />
+    <title>Keiken Resume</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 210mm;
+            height: 297mm;
+            margin: 0 auto;
+            padding: 20mm;
+            box-sizing: border-box;
+        }
+
+        .header {
+            width: 100%;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .profile-pic {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            float: left;
+            margin-right: 20px;
+        }
+
+        .name-title {
+            float: left;
+            margin-top: 10px;
+        }
+
+        h1 {
+            color: #0066cc;
+            margin: 0;
+            font-size: 24px;
+            text-transform: uppercase;
+        }
+
+        p {
+            margin: 5px 0;
+        }
+
+        h2 {
+            color: #0066cc;
+            border-bottom: 2px solid #0066cc;
+            padding-bottom: 5px;
+            font-size: 18px;
+        }
+
+        .contact-info {
+            clear: both;
+            margin-bottom: 20px;
+            font-size: 14px;
+            overflow: hidden;
+        }
+
+
+
+        .contact-info span {
+            float: left;
+            width: 33.33%;
+            box-sizing: border-box;
+            padding-right: 10px;
+        }
+
+        .contact-info span:last-child {
+            text-align: right;
+            padding-right: 0;
+        }
+
+        .contact-info span:nth-child(2) {
+            text-align: center;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .entry {
+            width: 100%;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+        .entry-content {
+            width: 70%;
+            float: left;
+        }
+
+        .date {
+            color: #0066cc;
+            font-weight: bold;
+            width: 30%;
+            float: right;
+            text-align: right;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin: 5px 0;
+        }
+
+        .two-column {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .column {
+            width: 48%;
+            float: left;
+            margin-right: 20px;
+        }
+
+        .column:last-child {
+            margin-right: 0;
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="header">
+    <img src="https://img.freepik.com/photos-gratuite/gens-souriants-beaux-hommes-gai_1187-6057.jpg?t=st=1723563123~exp=1723566723~hmac=1e7200464f6ebc9b66340e0eb9d644058f0d7ab0303842c49a44d8215c2f8970&w=740" alt="Profile Picture" class="profile-pic">
+    <div class="name-title">
+        <h1 th:text="${data.name}">Name</h1>
+        <p th:text="${data.cvRole}">Job Title</p>
+    </div>
+</div>
+
+<div class="contact-info">
+    <span>Email: email@example.com</span>
+    <span style="float: right">Phone: Phone Number</span>
+</div>
+
+<div class="section">
+    <h2>PROFILE SUMMARY</h2>
+    <p th:text="${data.abstractProfile}">Brief professional summary goes here...</p>
+</div>
+
+<div class="section">
+    <h2>EDUCATION</h2>
+    <div class="entry" th:each="education : ${data.facts}" th:if="${education.factType.name() == 'education'}">
+        <div class="entry-content">
+            <p><strong th:text="${education.factDescription}">Degree Name</strong> - <span th:text="${education.factTitle}">University Name</span></p>
+        </div>
+        <div class="date" th:text="${education.startDate + ' - ' + education.endDate}">Year - Year</div>
+    </div>
+</div>
+
+<div class="section">
+    <h2>WORK EXPERIENCE</h2>
+    <div id="experienceContainer">
+        <div class="entry" th:each="experience : ${data.facts}" th:if="${experience.factType.name() == 'experience'}" th:attr="data-end-date=${experience.endDate}">
+            <div class="entry-content">
+                <p><strong th:text="${experience.location}">Job Title</strong> - <span th:text="${experience.factTitle}">Company Name</span></p>
+                <ul>
+                    <li th:each="line : ${#strings.listSplit(experience.factDescription, '\\.')}">
+                        <span th:text="${line}">Responsibility or achievement</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="date" th:text="${experience.startDate + ' - ' + experience.endDate}">Year - Present</div>
+        </div>
+    </div>
+</div>
+
+<div class="section two-column">
+    <div class="column">
+        <h2>PROFESSIONAL SKILLS</h2>
+        <ul th:each="skills : ${data.getSkills()}">
+            <li th:text="${skills}">Skill 1</li>
+        </ul>
+    </div>
+    <div class="column">
+        <h2>CERTIFICATION</h2>
+        <ul th:each="certif : ${data.getCertifications()}">
+            <li th:text="${certif}">Language 1</li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

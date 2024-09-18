@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamza Salmane Resume</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            color: #4a4a4a;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            width: 210mm; /* A4 width */
+            height: 297mm; /* A4 height */
+            margin: 0 auto;
+            background-color: white;
+            padding: 20mm; /* Increased padding for better margins */
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            box-sizing: border-box; /* Include padding in width calculation */
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            background-color: #f0f8ff;
+            padding-top: 12px;
+            padding-right: 20px;
+            padding-left: 20px;
+        }
+        .logo {
+            width: 100px; /* Slightly reduced size */
+        }
+        .certifications {
+            display: flex;
+            gap: 8px; /* Reduced gap */
+            justify-content: center;
+        }
+        .cert-icon {
+            width: 25px; /* Slightly reduced size */
+            height: 25px;
+            background-color: #ddd;
+            border-radius: 50%;
+        }
+        .stats {
+            text-align: right;
+            font-size: 20px; /* Slightly reduced size */
+            font-weight: bold;
+            color: #4682b4;
+        }
+        .stats div {
+            margin-bottom: 8px; /* Reduced margin */
+        }
+        .name {
+            font-size: 24px; /* Slightly reduced size */
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        .location {
+            font-style: italic;
+            text-align: left;
+            margin-top: -15px;
+
+        }
+        .description {
+            margin-top: 10px;
+            text-align: left;
+            max-width: 100%; /* Increased max-width */
+
+        }
+        .info{
+            background-color: #f0f8ff;
+            margin-top: -17px;
+            padding-bottom: 20px;
+
+        }
+        .education {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+
+            text-align: center;
+        }
+        .skills {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+        .skill {
+            text-align: center;
+            width: 45px; /* Slightly reduced size */
+        }
+        .skill-icon {
+            width: 35px; /* Slightly reduced size */
+            height: 35px;
+            background-color: #ddd;
+            border-radius: 50%;
+            margin: 0 auto;
+        }
+        .experience {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Changed to 2 columns */
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .job {
+            background-color: #f9f9f9;
+            padding: 8px;
+            border-radius: 5px;
+        }
+        .job h3 {
+            margin-top: 0;
+            font-size: 16px; /* Reduced font size */
+        }
+        .job p, .job ul {
+            font-size: 14px; /* Reduced font size */
+        }
+        .job ul {
+            padding-left: 20px; /* Reduced padding */
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+
+        <img src="https://www.wetech.ma/im/180/images/300/ca-jqpt6uapljeqci7aqjfbeeph69i54m15032022122111.jpg" alt="Keiken Digital Solutions" class="logo">
+            <div class="certifications">
+                <img src="cert1.png" alt="Certification 1" class="cert-icon">
+                <img src="cert2.png" alt="Certification 2" class="cert-icon">
+                <img src="cert3.png" alt="Certification 3" class="cert-icon">
+                <img src="cert4.png" alt="Certification 4" class="cert-icon">
+                <img src="cert5.png" alt="Certification 5" class="cert-icon">
+            </div>
+            <div class="stats">
+                <div><span class="stat-number">+13</span> <span class="stat-text">Years of experience as<br>Software Engineer</span></div>
+                <div><span class="stat-number">2</span> <span class="stat-text">Data analysis project</span></div>
+                <div><span class="stat-number">5</span> <span class="stat-text">Certifications</span></div>
+            </div>
+        </div>
+   <div class="info">
+
+    <h1 class="name">Hamza Salmane</h1>
+    <div class="location">Casablanca</div>
+    <p class="description">Experienced Java developer skilled in microservices, full-stack development, and modern DevOps practices, including cloud services and CI/CD pipelines.</p>
+   </div>
+    <div class="education">
+
+
+        <div>
+            <div class="edu-title" >Degree Name</div>
+            <div class="edu-details" >University Name | Date Range</div>
+        </div>
+
+        <div>
+            <div class="edu-title" >Degree Name</div>
+            <div class="edu-details" >University Name | Date Range</div>
+        </div>
+    </div>
+
+    <div class="skills">
+        <img src="cert1.png" alt="Certification 1" class="cert-icon">
+        <img src="cert1.png" alt="Certification 1" class="cert-icon">
+        <img src="cert1.png" alt="Certification 1" class="cert-icon">
+        <img src="cert1.png" alt="Certification 1" class="cert-icon">
+        <img src="cert1.png" alt="Certification 1" class="cert-icon">
+        <img src="cert1.png" alt="Certification 1" class="cert-icon">
+        <img src="cert1.png" alt="Certification 1" class="cert-icon">
+        <img src="cert1.png" alt="Certification 1" class="cert-icon">
+
+
+    </div>
+
+    <div class="experience">
+        <div class="job">
+            <h3>Software Engineer</h3>
+            <p>2020 – 2023 | capgemini – City A</p>
+            <ul>
+                <li>Developed applications using Java, Docker, Kubernetes, Python, Vue.js, and React.js for diverse software solutions.</li>
+            </ul>
+            <p>Technologies: Java, Spring Boot, Docker, Kubernetes</p>
+        </div>
+        <div class="job">
+            <h3>Software Engineer</h3>
+            <p>2020 – 2023 | capgemini – City A</p>
+            <ul>
+                <li>Developed various applications using Laravel.</li>
+            </ul>
+            <p>Technologies: Java, Spring Boot.</p>
+        </div>
+        <div class="job">
+            <h3>Software Engineer</h3>
+            <p>2020 – 2023 | capgemini – City A</p>
+            <ul>
+                <li>Developed various applications using React.</li>
+            </ul>
+            <p>Technologies: Java, Spring Boot.</p>
+        </div>
+        <div class="job">
+            <h3>Software Engineer</h3>
+            <p>2020 – 2017 | Amzon – City A</p>
+            <ul>
+                <li>Developed various applications using Angular.</li>
+            </ul>
+            <p>Technologies: Java, Spring Boot.</p>
+        </div>
+        <div class="job">
+            <h3>Software Engineer</h3>
+            <p>2020 – 2023 | Uber – City A</p>
+            <ul>
+                <li>Developed various applications using Docker.</li>
+            </ul>
+            <p>Technologies: Java, Spring Boot.</p>
+        </div>
+        <div class="job">
+            <h3>Software Engineer</h3>
+            <p>2020 – 2023 | Adobe – City A</p>
+            <ul>
+                <li>Developed various applications using Vue.js.</li>
+            </ul>
+            <p>Technologies: Java, Spring Boot.</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
