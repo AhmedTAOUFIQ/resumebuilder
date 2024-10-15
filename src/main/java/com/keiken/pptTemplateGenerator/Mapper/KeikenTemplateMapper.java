@@ -77,13 +77,13 @@ public class KeikenTemplateMapper extends TemplateBaseMapper {
         );
     }
 
-    public String[] getSkills() {
+    /*public String[] getSkills() {
         return facts.stream()
                 .flatMap(fact -> fact.getLinkedSkills().stream())
                 .map(Skill::getSkillName)
                 .distinct()
                 .toArray(String[]::new);
-    }
+    }*/
 
     public Integer[] getSkillsPercentages() {
         return new Integer[]{30, 50, 70, 80, 40, 100, 45, 50, 60, 95};

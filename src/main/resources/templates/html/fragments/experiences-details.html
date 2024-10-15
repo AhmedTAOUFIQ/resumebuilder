@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+<body>
+<div th:fragment="experiences-details">
+    <div class="experiences-details-container">
+        <div class="experiences-cv-role">
+            <div class="years-experiences">
+                <span class="years" th:text="${data.yearsExperience}">X</span>
+            </div>
+            <div class="experiences-description">
+                <span>years in digital transformation</span>
+            </div>
+        </div>
+
+        <div class="project-type-details">
+            <div class="number-project-container">
+                <span class="years" th:text="${data.projectCount}">Y</span>
+            </div>
+            <div class="experiences-description">Software architecture projects</div>
+        </div>
+
+        <div class="number-certifications-details">
+            <div class="number-certifications">
+                <span class="years" th:text="${data.certificationCount}">O</span>
+            </div>
+            <div class="certifications-title">certifications</div>
+        </div>
+        <div class="certifications-list">
+            <div class="certifications-description" th:each="certification : ${data.getCertifications()}">
+                <div th:text="${certification}"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

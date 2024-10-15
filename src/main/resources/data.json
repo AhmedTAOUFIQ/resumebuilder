@@ -1,0 +1,299 @@
+{
+  "name": "Hamza Salmane",
+  "city": "Casablanca",
+  "abstractProfile": "Skilled Java and Spring Boot developer specializing in microservices, full-stack development, and modern DevOps with AWS expertise.",
+  "roleDescription": "IT warrior, with important experience in java, spring boot and docker.",
+  "cvRole": "Software Engineer",
+  "facts": [
+    {
+      "factTitle": "Software Engineer",
+      "startDate": "2020",
+      "endDate": "2023",
+      "factType": "experience",
+      "factDescription": "Developed various applications using Java.Developed various applications using Docker.",
+      "location": "Capgemini",
+      "city": "City A",
+      "linkedSkills": [
+        {
+          "id": "1",
+          "skillName": "Java",
+          "level": "intermediate"
+        },
+        {
+          "id": "2",
+          "skillName": "Spring",
+          "level": "advanced"
+        },
+        {
+          "id": "3",
+          "skillName": "Docker",
+          "level": "intermediate"
+        },
+        {
+          "id": "4",
+          "skillName": "Kubernetes",
+          "level": "intermediate"
+        }
+      ]
+    },
+    {
+      "factTitle": "Software Engineer",
+      "startDate": "2020",
+      "endDate": "2023",
+      "factType": "experience",
+      "factDescription": "Developed various applications using Laravel.Developed various applications using Java.",
+      "location": "Capgemini",
+      "city": "City A",
+      "linkedSkills": [
+        {
+          "id": "1",
+          "skillName": "Java",
+          "level": "intermediate"
+        },
+        {
+          "id": "2",
+          "skillName": "Spring",
+          "level": "advanced"
+        }
+      ]
+    },
+    {
+      "factTitle": "Software Engineer",
+      "startDate": "2020",
+      "endDate": "2023",
+      "factType": "experience",
+      "factDescription": "Developed various applications using React.Developed various applications using Java.",
+      "location": "Capgemini",
+      "city": "City A",
+      "linkedSkills": [
+        {
+          "id": "1",
+          "skillName": "Java",
+          "level": "intermediate"
+        },
+        {
+          "id": "2",
+          "skillName": "spring",
+          "level": "advanced"
+        }
+      ]
+    },
+    {
+      "factTitle": "Software Engineer",
+      "startDate": "2017",
+      "endDate": "2020",
+      "factType": "experience",
+      "factDescription": "Developed various applications using Angular.",
+      "location": "Amazon",
+      "city": "City A",
+      "linkedSkills": [
+        {
+          "id": "1",
+          "skillName": "Java",
+          "level": "intermediate"
+        },
+        {
+          "id": "2",
+          "skillName": "Spring",
+          "level": "advanced"
+        }
+      ]
+    },
+    {
+      "factTitle": "Software Engineer",
+      "startDate": "2020",
+      "endDate": "2023",
+      "factType": "experience",
+      "factDescription": "Developed various applications using Docker.",
+      "location": "Uber",
+      "city": "City A",
+      "linkedSkills": [
+        {
+          "id": "1",
+          "skillName": "Java",
+          "level": "intermediate"
+        },
+        {
+          "id": "2",
+          "skillName": "Spring",
+          "level": "advanced"
+        }
+      ]
+    },
+    {
+      "factTitle": "Project Manager",
+      "startDate": "2018",
+      "endDate": "2020",
+      "factType": "experience",
+      "factDescription": "Managed multiple projects and teams.",
+      "location": "Alten",
+      "city": "City B",
+      "linkedSkills": [
+        {
+          "id": "1",
+          "skillName": "Java",
+          "level": "intermediate"
+        },
+        {
+          "id": "2",
+          "skillName": "Angular",
+          "level": "beginner"
+        },
+        {
+          "id": "3",
+          "skillName": "aem",
+          "level": "intermediate"
+        },
+        {
+          "id": "4",
+          "skillName": "AWS",
+          "level": "beginner"
+        }
+      ]
+    },
+    {
+      "factTitle": "Azure Fundamentals",
+      "startDate": "2022",
+      "endDate": "2022",
+      "factType": "certification",
+      "factDescription": "Completed certification in Advanced Java.",
+      "location": "Institution C",
+      "city": "City C",
+      "linkedSkills": [
+        {
+          "id": "1",
+          "skillName": "Python",
+          "level": "intermediate"
+        },
+        {
+          "id": "2",
+          "skillName": "Docker",
+          "level": "intermediate"
+        },
+        {
+          "id": "3",
+          "skillName": "adobe",
+          "level": "intermediate"
+        }
+      ]
+    },
+    {
+      "factTitle": "CCNA Certified",
+      "startDate": "2022",
+      "endDate": "2022",
+      "factType": "certification",
+      "factDescription": "Completed certification in Advanced Java.",
+      "location": "Institution C",
+      "city": "City C",
+      "linkedSkills": [
+        {
+          "id": "1",
+          "skillName": "Python",
+          "level": "intermediate"
+        },
+        {
+          "id": "2",
+          "skillName": "Docker",
+          "level": "intermediate"
+        },
+        {
+          "id": "3",
+          "skillName": "adobe",
+          "level": "intermediate"
+        }
+      ]
+    },
+    {
+      "factTitle": "HCIA Huawei",
+      "startDate": "2022",
+      "endDate": "2022",
+      "factType": "certification",
+      "factDescription": "Completed certification in Advanced Java.",
+      "location": "Institution C",
+      "city": "City C",
+      "linkedSkills": [
+        {
+          "id": "1",
+          "skillName": "Python",
+          "level": "intermediate"
+        },
+        {
+          "id": "2",
+          "skillName": "Docker",
+          "level": "intermediate"
+        },
+        {
+          "id": "3",
+          "skillName": "adobe",
+          "level": "intermediate"
+        }
+      ]
+    },
+    {
+      "factTitle": "Java Certified Programmer",
+      "startDate": "2022",
+      "endDate": "2022",
+      "factType": "certification",
+      "factDescription": "Completed certification in Advanced Java.",
+      "location": "Institution C",
+      "city": "City C",
+      "linkedSkills": [
+        {
+          "id": "1",
+          "skillName": "Python",
+          "level": "intermediate"
+        },
+        {
+          "id": "2",
+          "skillName": "Docker",
+          "level": "intermediate"
+        },
+        {
+          "id": "3",
+          "skillName": "adobe",
+          "level": "intermediate"
+        },
+        {
+          "id": "4",
+          "skillName": "azure",
+          "level": "intermediate"
+        },
+        {
+          "id": "5",
+          "skillName": "Zig",
+          "level": "intermediate"
+        }
+      ]
+    },
+    {
+      "factTitle": "Kubernetes AppDev",
+      "startDate": "2016",
+      "endDate": "2020",
+      "factType": "certification",
+      "factDescription": "Bachelor's degree from University ENSAH.",
+      "location": "University ENSAH",
+      "city": "Hoceima",
+      "linkedSkills": []
+    },
+    {
+      "factTitle": "ensate",
+      "startDate": "2010",
+      "endDate": "2020",
+      "factType": "education",
+      "factDescription": "Bachelor's degree from University ENSATE with science physique.",
+      "location": "University ENSATE",
+      "city": "Errachidia",
+      "linkedSkills": []
+    },
+    {
+      "factTitle": "ensam",
+      "startDate": "2010",
+      "endDate": "2018",
+      "factType": "education",
+      "factDescription": "Bachelor's degree from University ENSAM with science physique.",
+      "location": "ENSAM",
+      "city": "Errachidia",
+      "linkedSkills": []
+    }
+  ]
+}

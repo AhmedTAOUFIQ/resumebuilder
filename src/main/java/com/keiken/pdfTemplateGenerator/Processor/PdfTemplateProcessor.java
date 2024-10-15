@@ -18,7 +18,7 @@ public class PdfTemplateProcessor implements TemplateProcessor {
     public byte[] processTemplate(String templateFilename, TemplateBaseMapper data) {
         String templateName = templateFilename.split("\\.")[0];
 
-        byte[] pdfBytes = templateHandler.generatePdf(templateName, data);
+        byte[] pdfBytes = templateHandler.generatePdfLandscape(templateName, data);
 
         log.info("PDF Template Process Completed");
 

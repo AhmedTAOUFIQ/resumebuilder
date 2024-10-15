@@ -1,0 +1,25 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="experiences">
+    <div class="experiences">
+        <div class="experience-container" th:each="experience : ${data.getFacts()}"
+             th:if="${experience.factType.name() == 'experience'}">
+            <div class="dates">
+                <span th:text="${experience.factTitle + ' | ' + experience.startDate + ' - ' + experience.endDate}"></span>
+            </div>
+            <div class="location">
+                <span th:text="${experience.location + ' | ' + experience.city}"></span>
+            </div>
+            <div class="job description" th:text="${experience.factDescription}">Job description</div>
+            <div class="job-technologies">
+                <span>Technologies :</span>
+                <div class="skills" th:each="skill : ${experience.linkedSkills}">
+                    <span th:text="${skill.skillName}">List of technologies</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

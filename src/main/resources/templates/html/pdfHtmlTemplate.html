@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Profile</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div class="container">
+
+    <div class="header">
+
+        <div th:replace="fragments/profile :: profile"></div>
+
+        <div th:replace="fragments/education :: education"></div>
+
+        <div th:replace="fragments/experiences-details :: experiences-details"></div>
+    </div>
+
+    <div th:replace="fragments/technologies :: technologies"></div>
+
+    <div th:replace="fragments/experiences :: experiences"></div>
+
+</div>
+
+</body>
+
+</html>

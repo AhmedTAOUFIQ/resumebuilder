@@ -1,0 +1,37 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="technologies">
+    <div class="technologies">
+        <div th:if="${data.getSkills() != null}">
+            <div th:with="totalSkills=${data.getSkills().size()}">
+                <div class="skills-circle-container" th:if="${totalSkills > 0}">
+                    <div class="skills-before" th:with="halfSkills=${data.getSkills().subList(0, totalSkills / 2)}">
+                        <div class="skill-circle" th:each="skill : ${halfSkills}">
+                            <div class="skill-wrapper" th:classappend="${skill.level}">
+                                <img th:src="'/images/technologies/' + ${skill.skillName} + '.png'"
+                                     th:alt="${skill.skillName}" class="skill-image"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profile-image">
+                        <img src="/images/picture.png" alt="Profile Image"/>
+                    </div>
+
+                    <div class="skills-after"
+                         th:with="secondHalfSkills=${data.getSkills().subList(totalSkills / 2, totalSkills)}">
+                        <div class="skill-circle" th:each="skill : ${secondHalfSkills}">
+                            <div class="skill-wrapper" th:classappend="${skill.level}">
+                                <img th:src="'/images/technologies/' + ${skill.skillName} + '.png'"
+                                     th:alt="${skill.skillName}" class="skill-image"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

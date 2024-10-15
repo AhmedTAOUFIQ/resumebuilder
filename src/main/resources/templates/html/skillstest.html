@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <style>
+ .technologies {
+    margin-top: 5px;
+    padding: 20px;
+    text-align: center;
+    white-space: nowrap; /* Prevents elements from wrapping to the next line */
+}
+
+.skills-circle-container {
+    display: inline-block; /* Ensures each section (skills left and right) is on the same line */
+    margin: 0 20px; /* Adds space between the skill images and the profile image */
+}
+
+.skill-wrapper {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin: 10px;
+    border-radius: 50%;
+    vertical-align: middle; /* Aligns the skill images vertically */
+}
+.skill-circle{
+  display: inline-block;
+  }
+.skill-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    position: relative;
+    z-index: 1;
+}
+
+.profile-image {
+    display: inline-block; /* Ensure the profile image is on the same line */
+    vertical-align: middle; /* Aligns the profile image to the middle */
+    margin: 0 20px; /* Adds space between the profile image and the skills */
+}
+
+.profile-image img {
+    width: 100px; /* Ensure the profile image is appropriately sized */
+    height: 100px;
+    border-radius: 50%; /* Makes the profile image circular */
+}
+
+/* Skill wrapper levels (Beginner, Intermediate, Advanced) remain the same */
+.skill-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 5px solid transparent;
+    box-sizing: border-box;
+    z-index: 0;
+    transform: rotate(0deg);
+}
+
+.skill-wrapper.beginner::before {
+    border-top-color: rgba(0, 0, 255, 0.8);
+    border-right-color: rgba(0, 0, 255, 0.8);
+    transform: rotate(60deg);
+}
+
+.skill-wrapper.intermediate::before {
+    border-top-color: rgba(0, 0, 255, 0.8);
+    border-right-color: rgba(0, 0, 255, 0.8);
+    border-bottom-color: rgba(0, 0, 255, 0.8);
+    transform: rotate(120deg);
+}
+
+.skill-wrapper.advanced::before {
+    border: 5px solid rgba(0, 0, 255, 0.8);
+}
+
+.skills-before, .skills-after{
+  display: inline-block;
+}
+
+    </style>
+</head>
+<body>
+<div class="technologies">
+    <div th:if="${data.getSkills() != null}">
+        <div th:with="totalSkills=${data.getSkills().size()}">
+            <!-- First block of skills aligned to the left -->
+            <div class="skills-circle-container" th:if="${totalSkills > 0}">
+                <div class="skills-before" th:with="halfSkills=${data.getSkills().subList(0, totalSkills / 2)}">
+                    <div class="skill-circle" th:each="skill : ${halfSkills}">
+                        <div class="skill-wrapper" th:classappend="${skill.level}">
+                            <img th:src="'/images/technologies/' + ${skill.skillName} + '.png'"
+                                 th:alt="${skill.skillName}" class="skill-image"/>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Profile image in the middle -->
+                <div class="profile-image">
+                    <img src="/images/picture.png" alt="Profile Image"/>
+                </div>
+
+                <!-- Second block of skills aligned to the right -->
+                <div class="skills-after"
+                     th:with="secondHalfSkills=${data.getSkills().subList(totalSkills / 2, totalSkills)}">
+                    <div class="skill-circle" th:each="skill : ${secondHalfSkills}">
+                        <div class="skill-wrapper" th:classappend="${skill.level}">
+                            <img th:src="'/images/technologies/' + ${skill.skillName} + '.png'"
+                                 th:alt="${skill.skillName}" class="skill-image"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,489 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <title>Document</title>
+  <style type="text/css">
+.container {
+    margin-left: 0px;
+    font-family: "Arial", sans-serif;
+    width: 100%;
+    overflow: hidden;
+}
+
+.header {
+    background-color: #edf0f5;
+    overflow: hidden;
+}
+
+.profile-container,
+.education-container,
+.experiences-details-container {
+    float: left;
+    width: 32%;
+    box-sizing: border-box;
+    vertical-align: top;
+    padding-right: 1%;
+}
+
+.profile-container{
+    text-align: right;
+}
+
+.experiences-details-container {
+    padding-right: 0;
+}
+
+.logo-container {
+ display: inline-block;
+    vertical-align: middle; /* Aligns with text */
+    margin-bottom: 10px;
+}
+
+.logo {
+    max-width: 120px;
+    display: block;
+}
+
+.name-container {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    color: #3d6e9f;
+    margin-bottom: 10px;
+}
+
+.city-container {
+    font-size: 14px;
+    color: #3d6e9f;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.abstract-profile-container {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #3d6e9f;
+    line-height: 1.5;
+    max-width: 100%;
+}
+
+.certification-icons {
+    margin-left: 30px;
+    overflow: hidden;
+    padding: 10px;
+    background-color: #edf0f5;
+    border-radius: 8px;
+    width: 100%;
+}
+
+.certification-image {
+    display: inline-block;
+    width: 30px;
+    text-align: center;
+    margin-right: 15px;
+    vertical-align: top;
+}
+
+.certification-image img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    margin-bottom: 5px;
+}
+
+.school-container {
+    overflow: hidden;
+}
+
+.school {
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.school-image {
+    float: left;
+    margin-right: 10px;
+    margin-left: 30px;
+}
+
+.school-image img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+.education-details {
+    margin-left: 80px;
+}
+
+.school-year {
+    font-size: 18px;
+    font-weight: bold;
+    color: #3d6e9f;
+    margin-bottom: 8px;
+}
+
+.education-description {
+    font-size: 12px;
+    color: #3d6e9f;
+}
+
+.experiences-details-container {
+    display: inline-block
+    font-family: "Arial", sans-serif;
+    background-color: #edf0f5;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.project-type-details,
+.number-certifications-details {
+    white-space: nowrap; /* Ensure the elements don't wrap to the next line */
+}
+
+.years-experiences,
+.number-project-container,
+.number-certifications{
+    display: inline-block; /* Inline elements on the same line */
+    vertical-align: middle;
+    font-size: 26px;
+    font-weight: bold;
+    color: #3d6e9f;
+    margin-right: 10px;
+    width: 50px; /* Fixed width to keep the numbers aligned */
+    text-align: right; /* Align numbers to the right */
+}
+.number-certifications{
+    margin-left: 0px;
+}
+.experiences-description{
+    display: inline-block;
+    font-weight: bold;
+    font-size: 14px;
+    color: #3d6e9f;
+    margin-left: 10px;
+    text-align: left;
+}
+.certifications-title{
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: bold;
+    font-size: 14px;
+    color: #3d6e9f;
+    margin-left: 10px;
+    text-align: left;
+}
+.certifications-list{
+    margin-left: 70px;
+}
+.certifications-description {
+    font-size: 10px;
+    color: #3d6e9f;
+    line-height: 1.5;
+    display: inline-block;
+    margin-left: 5px;
+}
+.technologies {
+    margin-top: 5px;
+    text-align: center;
+    white-space: nowrap; /* Prevents elements from wrapping to the next line */
+}
+
+.skills-circle-container {
+    display: inline-block; /* Ensures each section (skills left and right) is on the same line */
+    margin: 0 20px; /* Adds space between the skill images and the profile image */
+}
+
+
+.skill-circle{
+    display: inline-block;
+}
+
+
+.profile-image {
+    display: inline-block; /* Ensure the profile image is on the same line */
+    vertical-align: middle; /* Aligns the profile image to the middle */
+    margin: 0 20px; /* Adds space between the profile image and the skills */
+}
+
+.profile-image img {
+    width: 80px; /* Ensure the profile image is appropriately sized */
+    height: 80px;
+    border-radius: 50%; /* Makes the profile image circular */
+}
+.skill-wrapper {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    margin: 10px;
+    display: inline-block; /* Assure que les éléments sont sur la même ligne */
+    border-radius: 50%;
+    text-align: center;
+    vertical-align: middle; /* Aligne les images en haut */
+}
+
+.skill-image {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center image horizontally and vertically */
+    border-radius: 50%; /* Make sure the image itself is circular */
+    z-index: 1; /* Ensure the image is above the circular border */
+}
+
+.skill-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 5px solid transparent;
+    box-sizing: border-box;
+    z-index: 0;
+    transform: rotate(0deg);
+}
+
+.skill-wrapper.beginner::before {
+    border-top-color: #3d6e9f;
+    border-right-color: #3d6e9f;
+    transform: rotate(40deg);
+}
+
+.skill-wrapper.intermediate::before {
+    border-top-color: #3d6e9f;
+    border-right-color: #3d6e9f;
+    border-bottom-color: #3d6e9f;
+    transform: rotate(120deg);
+}
+
+.skill-wrapper.advanced::before {
+    border: 5px solid #3d6e9f;
+}
+
+.skills-before, .skills-after{
+  display: inline-block;
+}
+.experiences {
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
+    text-align: center;
+}
+
+.experience-row {
+    display: block; /* Each row is a block to contain the cards */
+    width: 100%;
+    text-align: center; /* Center the cards within the row */
+
+}
+
+.experience-container {
+    display: inline-block;
+    width: 300px; /* Fixed width for consistent PDF rendering */
+    padding: 15px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    vertical-align: top;
+    box-sizing: border-box;
+    page-break-inside: avoid; /* Prevents splitting cards between pages */
+}
+
+.dates {
+    font-weight: bold;
+    color: #36597c;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.location,
+.job-description,
+.job-technologies {
+    margin-bottom: 10px;
+}
+
+.job-description {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #333;
+}
+
+.skills {
+    font-size: 14px;
+    color: #666;
+    display: inline-block;
+    margin-left: 5px;
+}
+
+/* PDF-Specific Styles */
+@media print {
+    .experience-container {
+        display: inline-block;
+        width: 300px; /* Fixed width for three cards per row */
+        box-shadow: none; /* Remove shadows for a cleaner PDF */
+        border-radius: 0; /* Remove rounded corners */
+        page-break-inside: avoid; /* Prevent breaking within the card */
+        vertical-align: top; /* Align cards at the top */
+    }
+
+    .experience-row {
+        width: 100%;
+        text-align: center; /* Center the experience cards within each row */
+    }
+
+    .experiences {
+        display: block;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+}
+
+
+    </style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="profile-container">
+      <div class="logo-container">
+        <img th:src="@{~/images/keiken.png}" alt="Keiken Logo" class="logo"/>
+      </div>
+
+      <div class="name-container">
+        <span class="name" id="name" th:text="'I am '+${data.name}">John</span>
+      </div>
+      <div class="city-container">
+        <span class="city" th:text="${data.city}">Location</span>
+      </div>
+      <div class="abstract-profile-container">
+        <p class="abstract-profile" th:text="${data.abstractProfile}">Profile description</p>
+      </div>
+    </div>
+    <div class="education-container">
+      <div class="certification-icons">
+        <div class="certification-image" th:each="certification : ${data.getCertificationsIcons()}">
+          <img th:src="'/images/certifications/' + ${certification} + '.png'" th:alt="${certification}"/>
+        </div>
+
+      </div>
+      <div class="school-container">
+        <div class="school" th:each="education : ${data.getFacts()}"
+             th:if="${education.factType.name() == 'education'}">
+          <div class="school-image">
+            <img th:src="'/images/schools/' + ${education.factTitle} + '.png'"
+                 th:alt="${education.factTitle}"/>
+          </div>
+
+          <div class="education-details">
+            <div class="school-year">
+                            <span class="education-year"
+                                  th:text="${education.factTitle + ' | ' + education.startDate + ' - ' + education.endDate}">University Name | Date Range</span>
+            </div>
+            <div class="school-description">
+              <span class="education-description" th:text="${education.factDescription}">Education Description</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="experiences-details-container">
+      <div class="experiences-cv-role">
+        <div class="years-experiences">
+          <span class="years" th:text="${data.yearsExperience}">X</span>
+        </div>
+        <div class="experiences-description">
+          <span>years in digital transformation</span>
+        </div>
+      </div>
+
+      <div class="project-type-details">
+        <div class="number-project-container">
+          <span class="years" th:text="${data.projectCount}">Y</span>
+        </div>
+        <div class="experiences-description">Software architecture projects</div>
+      </div>
+
+      <div class="number-certifications-details">
+        <div class="number-certifications">
+          <span class="years" th:text="${data.certificationCount}">O</span>
+        </div>
+        <div class="certifications-title">certifications</div>
+      </div>
+      <div class="certifications-list">
+        <div class="certifications-description" th:each="certification : ${data.getCertifications()}">
+          <div th:text="${certification}"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="technologies">
+    <div th:if="${data.getSkills() != null}">
+      <div th:with="totalSkills=${data.getSkills().size()}">
+        <!-- First block of skills aligned to the left -->
+        <div class="skills-circle-container" th:if="${totalSkills > 0}">
+          <div class="skills-before" th:with="halfSkills=${data.getSkills().subList(0, totalSkills / 2)}">
+            <div class="skill-circle" th:each="skill : ${halfSkills}">
+              <div class="skill-wrapper" th:classappend="${skill.level}">
+                <img th:src="'/images/technologies/' + ${skill.skillName} + '.png'"
+                     th:alt="${skill.skillName}" class="skill-image"/>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Profile image in the middle -->
+          <div class="profile-image">
+            <img src="/images/picture.png" alt="Profile Image"/>
+          </div>
+
+          <!-- Second block of skills aligned to the right -->
+          <div class="skills-after"
+               th:with="secondHalfSkills=${data.getSkills().subList(totalSkills / 2, totalSkills)}">
+            <div class="skill-circle" th:each="skill : ${secondHalfSkills}">
+              <div class="skill-wrapper" th:classappend="${skill.level}">
+                <img th:src="'/images/technologies/' + ${skill.skillName} + '.png'"
+                     th:alt="${skill.skillName}" class="skill-image"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="experiences">
+    <div class="experience-container" th:each="experience : ${data.getFacts()}"
+         th:if="${experience.factType.name() == 'experience'}">
+      <div class="dates">
+        <span th:text="${experience.factTitle + ' | ' + experience.startDate + ' - ' + experience.endDate}"></span>
+      </div>
+      <div class="location">
+        <span th:text="${experience.location + ' | ' + experience.city}"></span>
+      </div>
+      <div class="job description" th:text="${experience.factDescription}">Job description</div>
+
+      <div class="job-technologies">
+        <span>Technologies :</span>
+        <div class="skills" th:each="skill : ${experience.linkedSkills}">
+          <span th:text="${skill.skillName}">List of technologies</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+</body>
+</html>
