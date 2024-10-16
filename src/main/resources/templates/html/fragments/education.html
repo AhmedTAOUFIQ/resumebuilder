@@ -1,30 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="">
 <body>
-<div th:fragment="education">
-    <div class="education-container">
-        <div class="certification-icons">
-            <div class="certification-image" th:each="certification : ${data.getCertificationsIcons()}">
-                <img th:src="'/images/certifications/' + ${certification} + '.png'" th:alt="${certification}"/>
+<div th:fragment="education" class="education-container">
+    <div class="certification-icons">
+        <div class="certification-image" th:each="certification : ${data.getCertificationsIcons()}">
+            <img th:src="'/images/certifications/' + ${certification} + '.png'" th:alt="${certification}"/>
+        </div>
+    </div>
+    <div class="school-container">
+        <div class="school" th:each="education : ${data.getFacts()}"
+             th:if="${education.factType.name() == 'education'}">
+            <div class="school-image">
+                <img th:src="'/images/schools/' + ${education.factTitle} + '.png'"
+                     th:alt="${education.factTitle}"/>
             </div>
 
-        </div>
-        <div class="school-container">
-            <div class="school" th:each="education : ${data.getFacts()}"
-                 th:if="${education.factType.name() == 'education'}">
-                <div class="school-image">
-                    <img th:src="'/images/schools/' + ${education.factTitle} + '.png'"
-                         th:alt="${education.factTitle}"/>
-                </div>
-
-                <div class="education-details">
-                    <div class="school-year">
+            <div class="education-details">
+                <div class="school-year">
                             <span class="education-year"
                                   th:text="${education.factTitle + ' | ' + education.startDate + ' - ' + education.endDate}">University Name | Date Range</span>
-                    </div>
-                    <div class="school-description">
-                        <span class="education-description" th:text="${education.factDescription}">Education Description</span>
-                    </div>
+                </div>
+                <div class="school-description">
+                    <span class="education-description"
+                          th:text="${education.factDescription}">Education Description</span>
                 </div>
             </div>
         </div>

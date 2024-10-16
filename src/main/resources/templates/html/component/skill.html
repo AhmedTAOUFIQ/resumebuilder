@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+<body>
+<div th:fragment="skill (skill)">
+  <div class="skill-wrapper" th:classappend="${skill.level}">
+    <img th:src="'/images/technologies/' + ${skill.skillName} + '.png'"
+         th:alt="${skill.skillName}" class="skill-image"/>
+  </div>
+</div>
+
+</body>
+</html>

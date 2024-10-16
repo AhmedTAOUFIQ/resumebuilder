@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="">
 <body>
-<div th:fragment="profile">
-    <div class="profile-container">
-        <div class="logo-container">
-            <img th:src="@{~/images/keiken.png}" alt="Keiken Logo" class="logo"/>
-        </div>
+<div th:fragment="profile" class="profile-container">
+    <div class="logo-container">
+        <img th:src="@{~/images/keiken.png}" alt="Keiken Logo" class="logo"/>
+    </div>
 
-        <div class="name-container">
-            <span class="name" id="name" th:text="'I am '+${data.name}">John</span>
-        </div>
-        <div class="city-container">
-            <span class="city" th:text="${data.city}">Location</span>
-        </div>
-        <div class="abstract-profile-container">
-            <p class="abstract-profile" th:text="${data.abstractProfile}">Profile description</p>
-        </div>
+    <div class="name-container">
+        <span class="name" id="name" th:text="'I am '+${data.name}">John</span>
+    </div>
+    <div class="city-container">
+        <span class="city" th:text="${data.city}">Location</span>
+    </div>
+    <div class="abstract-profile-container">
+        <p class="abstract-profile" th:text="${data.abstractProfile}">Profile description</p>
     </div>
 </div>
 </body>
