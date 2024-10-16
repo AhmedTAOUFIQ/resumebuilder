@@ -18,9 +18,12 @@ html, body {
 }
 
 .header {
-    padding: 5px;
+    position: fix;
+    padding-top: 20px;
     background-color: #edf0f5;
     overflow: hidden;
+    padding-bottom : 50px;
+
 }
 
 .profile-container,
@@ -29,6 +32,7 @@ html, body {
     float: left;
     width: 32%;
     padding: 5px;
+    vertical-align: middle;
 }
 
 .profile-container {
@@ -74,7 +78,6 @@ html, body {
     text-align: center;
     overflow: hidden;
     padding: 10px;
-    background-color: #edf0f5;
     border-radius: 8px; /* Optionnel, pourrait être retiré si besoin */
     width: 100%;
 }
@@ -176,19 +179,18 @@ html, body {
 }
 
 .technologies {
+    position : relative;
+    transform : translateY(-50%);
     text-align: center;
+    vertical-align : middle;
     white-space: nowrap;
     display: inline-block;
-}
-
-.skills-circle-container {
-    margin: 0 auto;
-    text-align: center;
 }
 
 .skills-before, .skills-after {
     display: inline-block;
     text-align: center;
+    vertical-align: middle;
 }
 
 .skill-circle {
@@ -218,7 +220,7 @@ html, body {
     justify-content: center;  /* Centrage horizontal */
     align-items: center;      /* Centrage vertical */
     border-radius: 50%;
-    border: 5px solid transparent;
+    background: white;
 }
 
 .skill-image {
@@ -236,9 +238,10 @@ html, body {
     border-radius: 50%;
     border-width: 5px;
     border-style: solid;
-    border-color: transparent;
+    border-color: grey;
     box-sizing: border-box;
 }
+
 
 .skill-wrapper.beginner:before {
     border-top-color: #3d6e9f;
