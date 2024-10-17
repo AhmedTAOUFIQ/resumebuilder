@@ -3,16 +3,16 @@
 <div th:fragment="experiences" class="experiences">
     <div class="experience-container" th:each="experience : ${data.getFacts()}"
          th:if="${experience.factType.name() == 'experience'}">
-        <div class="dates">
+        <div class="experience-dates">
             <span th:text="${experience.factTitle + ' | ' + experience.startDate + ' - ' + experience.endDate}"></span>
         </div>
-        <div class="location">
+        <div class="experience-location">
             <span th:text="${experience.location + ' | ' + experience.city}"></span>
         </div>
-        <div class="job description" th:text="${experience.factDescription}">Job description</div>
-        <div class="job-technologies">
+        <div class="experience-description" th:text="${experience.factDescription}">Job description</div>
+        <div class="experience-technologies">
             <span>Technologies :</span>
-            <div class="skills" th:each="skill : ${experience.linkedSkills}">
+            <div class="experience-skills" th:each="skill : ${experience.linkedSkills}">
                 <span th:text="${skill.skillName}">List of technologies</span>
             </div>
         </div>

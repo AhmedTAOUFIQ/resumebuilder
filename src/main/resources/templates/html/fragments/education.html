@@ -14,15 +14,13 @@
                 <img th:src="'/images/schools/' + ${education.factTitle} + '.png'"
                      th:alt="${education.factTitle}"/>
             </div>
-
-            <div class="education-details">
+            <div class="school-details">
                 <div class="school-year">
                             <span class="education-year"
                                   th:text="${education.factTitle + ' | ' + education.startDate + ' - ' + education.endDate}">University Name | Date Range</span>
                 </div>
                 <div class="school-description">
-                    <span class="education-description"
-                          th:text="${education.factDescription}">Education Description</span>
+                    <span th:text="${education.factDescription}">Education Description</span>
                 </div>
             </div>
         </div>

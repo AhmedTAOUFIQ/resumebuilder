@@ -1,24 +1,24 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
-<div th:fragment="technologies" class="technologies" th:if="${data.getSkills() != null}"
+<table th:fragment="technologies" class="technologies" th:if="${data.getSkills() != null}"
      th:with="totalSkills=${data.getSkills().size()}">
-    <div class="skills-circle-container" th:if="${totalSkills > 0}">
-        <div class="skills-before" th:with="halfSkills=${data.getSkills().subList(0, totalSkills / 2)}">
+    <TR class="skills-circle-container" th:if="${totalSkills > 0}">
+        <TD class="skills-before" th:with="halfSkills=${data.getSkills().subList(0, totalSkills / 2)}">
             <div class="skill-circle" th:each="skill : ${halfSkills}">
                 <div th:replace="~{/component/skill::skill(skill=${skill})}"></div>
             </div>
-        </div>
+        </TD>
 
-        <div class="profile-image">
+        <TD class="profile-image">
             <img src="/images/picture.png" alt="Profile Image"/>
-        </div>
+        </TD>
 
-        <div class="skills-after" th:with="secondHalfSkills=${data.getSkills().subList(totalSkills / 2, totalSkills)}">
+        <TD class="skills-after" th:with="secondHalfSkills=${data.getSkills().subList(totalSkills / 2, totalSkills)}">
             <div class="skill-circle" th:each="skill : ${secondHalfSkills}">
                 <div th:replace="~{/component/skill::skill(skill=${skill})}"></div>
             </div>
-        </div>
-    </div>
-</div>
+        </TD>
+    </TR>
+</table>
 </body>
 </html>

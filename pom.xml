@@ -85,8 +85,6 @@
 			<artifactId>jtidy</artifactId>
 			<version>r938</version>
 		</dependency>
-
-
 		<dependency>
 			<groupId>com.itextpdf</groupId>
 			<artifactId>kernel</artifactId>

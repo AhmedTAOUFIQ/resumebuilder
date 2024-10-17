@@ -19,19 +19,21 @@ html, body {
 
 .header {
     position: fix;
-    padding-top: 20px;
+    padding-top: 40px;
     background-color: #edf0f5;
     overflow: hidden;
-    padding-bottom : 50px;
+    padding-bottom : 70px;
+    display: table;
 
 }
 
 .profile-container,
 .education-container,
 .experiences-details-container {
-    float: left;
+    display : table-cell;
     width: 32%;
     padding: 5px;
+    text-align : center;
     vertical-align: middle;
 }
 
@@ -71,6 +73,11 @@ html, body {
     color: #3d6e9f;
     line-height: 1.5;
     max-width: 100%;
+    text-align : right;
+}
+.abstract-profile {
+    max-width: 80%;
+    margin-left: auto;
 }
 
 .certification-icons {
@@ -96,9 +103,13 @@ html, body {
     margin-bottom: 5px;
 }
 
+
+
 .school-container {
-    text-align: center;
     overflow: hidden;
+    width : 80%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .school {
@@ -106,51 +117,59 @@ html, body {
     margin-bottom: 20px;
 }
 
-.school-image {
-    float: left;
-    margin-right: 10px;
-    margin-left: 30px;
-}
 
 .school-image img {
     width: 30px;
     height: 30px;
 }
 
-.education-details {
-    text-align: left;
-    margin-left: 80px;
+.school-image {
+    padding-top : 0px;
+    padding-right : 20px;
+    padding-bottom : 20px;
+    padding-left : 20px;
+    float: left;
+    margin-right: 10px;
+    margin-left: 30px;
+}
+
+.school-details {
+    text-align : left;
 }
 
 .school-year {
-    font-size: 18px;
+    font-size: 12px;
     font-weight: bold;
     color: #3d6e9f;
     margin-bottom: 8px;
 }
 
-.education-description {
-    font-size: 12px;
+.school-description {
+    font-size: 10px;
     color: #3d6e9f;
 }
 
 .experiences-cv-role,
 .project-type-details,
 .certifications-details{
-}
+    margin-top : 10px;
+    margin-bottom : 10px;
+    vertical-align : top;
+    }
 
 .years-experiences,
 .number-project-container,
 .number-certifications {
     display: inline-block;
     vertical-align: top;
-    font-size: 26px;
+    font-size: 40px;
     font-weight: bold;
     color: #3d6e9f;
     margin-right: 10px;
-    width: 50px;
-    text-align: right;
-}
+    min-width: 70px;
+    text-align : right;
+    }
+
 
 .experiences-description,
 .number-certifications-details{
@@ -160,6 +179,7 @@ html, body {
     font-size: 14px;
     color: #3d6e9f;
     margin-left: 10px;
+    margin-bottom : auto;
     text-align: left;
     width: 230px;
 }
@@ -193,29 +213,35 @@ html, body {
     vertical-align: middle;
 }
 
-.skill-circle {
-    display: inline-block;
-    text-align: center;
-    position: relative;
-}
-
 .profile-image {
     display: inline-block;
     vertical-align: middle;
     margin: 0 20px;
 }
 
+.skill-circle {
+    display: inline-block;
+    text-align: center;
+    position: relative;
+}
+
+
 .profile-image img {
     width: 80px;
     height: 80px;
+    margin-left: 10px;
+    margin-right: 10px;
     border-radius: 50%;
 }
 
 .skill-wrapper {
     position: relative;
-    width: 50px;
-    height: 50px;
-    margin: 5px;
+    width: 60px;
+    height: 60px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     display: flex;
     justify-content: center;  /* Centrage horizontal */
     align-items: center;      /* Centrage vertical */
@@ -224,8 +250,8 @@ html, body {
 }
 
 .skill-image {
-    width: 35px; /* Taille de l'image fixée */
-    height: 35px;
+    width: 40px; /* Taille de l'image fixée */
+    height: 40px;
 }
 
 .skill-wrapper:before {
@@ -260,13 +286,6 @@ html, body {
 
 .experiences {
     width: 100%;
-    display: block;
-    text-align: center;
-}
-
-.experience-row {
-    display: block;
-    width: 100%;
     text-align: center;
 }
 
@@ -274,34 +293,36 @@ html, body {
     display: inline-block;
     width: 300px;
     padding: 15px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     vertical-align: top;
+    text-align: left;
 }
 
-.dates {
+.experience-dates {
     font-weight: bold;
     color: #36597c;
     font-size: 14px;
-    margin-bottom: 5px;
 }
 
-.location,
-.job-description,
-.job-technologies {
+.experience-location,
+.experience-description,
+.experience-technologies {
     margin-bottom: 10px;
 }
-
-.job-description {
-    font-size: 14px;
-    line-height: 1.6;
-    color: #333;
+.experience-location {
+    font-size : 12px;
+    font-style: italic;
 }
 
-.skills {
-    font-size: 14px;
-    color: #666;
+.experience-description {
+    font-size: 12px;
+    color: #333;
+}
+.experience-technologies > span{
+    font-size : 12px;
+    font-weight : bold;
+}
+.experience-skills {
+    font-size: 12px;
     display: inline-block;
     margin-left: 5px;
 }
