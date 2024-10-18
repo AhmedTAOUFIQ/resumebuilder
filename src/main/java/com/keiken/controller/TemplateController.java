@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
+
 @RestController
 @RequestMapping("api/")
 @RequiredArgsConstructor
@@ -20,7 +22,7 @@ public class TemplateController {
     private final TemplateService templateService;
 
     @PostMapping("pptemplate")
-    public ResponseEntity<byte[]> createPPTemplate(@RequestBody TemplateRequest templateRequest) {
+    public ResponseEntity<byte[]> createPPTemplate(@RequestBody TemplateRequest templateRequest) throws IOException {
         byte[] pptxData = templateService.processTemplate(
                 templateRequest.templateName() + ".pptx",
                 templateRequest.data()
@@ -32,7 +34,7 @@ public class TemplateController {
     }
 
     @PostMapping("pdftemplate")
-    public ResponseEntity<byte[]> createPdfTemplate(@RequestBody TemplateRequest templateRequest) {
+    public ResponseEntity<byte[]> createPdfTemplate(@RequestBody TemplateRequest templateRequest) throws IOException {
         byte[] templateContent = templateService.processTemplate(
                 templateRequest.templateName() + ".html",
                 templateRequest.data()

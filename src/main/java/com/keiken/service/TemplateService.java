@@ -6,7 +6,7 @@ import com.keiken.pdfTemplateGenerator.Mapper.KeikenTemplateMapper;
 import java.io.IOException;
 
 public interface TemplateService {
-    byte[] processTemplate(String templateFilename, TemplateBaseMapper data);
+    byte[] processTemplate(String templateFilename, TemplateBaseMapper data) throws IOException;
     //TemplateBaseMapper loadResumeFromJson() throws IOException;
     KeikenTemplateMapper loadResumeFromJson() throws IOException;
 }

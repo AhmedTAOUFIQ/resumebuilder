@@ -155,6 +155,7 @@ html, body {
     margin-top : 10px;
     margin-bottom : 10px;
     vertical-align : top;
+    color: #3d6e9f;
     }
 
 .years-experiences,
@@ -164,7 +165,6 @@ html, body {
     vertical-align: top;
     font-size: 40px;
     font-weight: bold;
-    color: #3d6e9f;
     margin-right: 10px;
     min-width: 70px;
     text-align : right;
@@ -177,7 +177,6 @@ html, body {
     vertical-align: top;
     font-weight: bold;
     font-size: 14px;
-    color: #3d6e9f;
     margin-left: 10px;
     margin-bottom : auto;
     text-align: left;
@@ -187,14 +186,11 @@ html, body {
 .certifications-title {
     font-weight: bold;
     font-size: 14px;
-    color: #3d6e9f;
     text-align: left;
 }
 
 .certifications-description {
     font-size: 10px;
-    color: #3d6e9f;
-    line-height: 1.5;
     display: inline-block;
 }
 
@@ -287,14 +283,21 @@ html, body {
 .experiences {
     width: 100%;
     text-align: center;
+    display : table;
+}
+.experience-row {
+    display : table-row;
+}
+.experience-container {
+    display: table-cell;
+    width: 340px;
+    padding: 15px;
+    text-align: left;
+    vertical-align : top;
 }
 
-.experience-container {
-    display: inline-block;
-    width: 300px;
-    padding: 15px;
-    vertical-align: top;
-    text-align: left;
+.experience-content {
+    float :left;
 }
 
 .experience-dates {

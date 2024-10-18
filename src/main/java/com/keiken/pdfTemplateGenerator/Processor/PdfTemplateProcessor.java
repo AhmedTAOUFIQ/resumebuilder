@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
+
 @Component("html")
 @RequiredArgsConstructor
 @Slf4j
@@ -15,7 +17,7 @@ public class PdfTemplateProcessor implements TemplateProcessor {
     private final PdfTemplateHandler templateHandler;
 
     @Override
-    public byte[] processTemplate(String templateFilename, TemplateBaseMapper data) {
+    public byte[] processTemplate(String templateFilename, TemplateBaseMapper data) throws IOException {
         String templateName = templateFilename.split("\\.")[0];
 
         byte[] pdfBytes = templateHandler.generatePdfLandscape(templateName, data);

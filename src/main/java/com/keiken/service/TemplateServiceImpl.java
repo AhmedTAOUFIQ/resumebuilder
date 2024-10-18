@@ -20,7 +20,7 @@ public class TemplateServiceImpl implements TemplateService {
   private final TemplateMapperStrategy templateMapperStrategy;
   private final TemplateProcessorStrategy templateProcessorStrategy;
 
-  public byte[] processTemplate(String templateFilename, TemplateBaseMapper data) {
+  public byte[] processTemplate(String templateFilename, TemplateBaseMapper data) throws IOException {
 
       TemplateProcessor templateProcessor = templateProcessorStrategy.getProcessor(templateFilename);
       TemplateBaseMapper mapper = templateMapperStrategy.getMapper(templateFilename);

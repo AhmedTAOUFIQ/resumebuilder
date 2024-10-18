@@ -2,10 +2,14 @@ package com.keiken.pdfTemplateGenerator.Handler;
 
 import com.itextpdf.html2pdf.ConverterProperties;
 import com.itextpdf.html2pdf.HtmlConverter;
+import com.itextpdf.html2pdf.resolver.font.DefaultFontProvider;
+import com.itextpdf.io.font.FontProgram;
+import com.itextpdf.io.font.FontProgramFactory;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
+import com.itextpdf.layout.font.FontProvider;
 import com.keiken.config.AppProperties;
 import com.keiken.mapper.TemplateBaseMapper;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +18,7 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -26,6 +31,7 @@ public class PdfTemplateHandlerImpl implements PdfTemplateHandler {
 
     private final AppProperties appProperties;
     private final TemplateEngine templateEngine;
+    public static final String ARIAL = "src/main/resources/static/fonts/arial";
 
     @Override
     public byte[] savePdfToFile(byte[] pdfBytes, String filename) {
@@ -67,9 +73,13 @@ public class PdfTemplateHandlerImpl implements PdfTemplateHandler {
         // Set margins (remove or customize them as needed)
         document.setMargins(0, 0, 0, 0);
 
-        // 5. Prepare ConverterProperties
+        // 5. Prepare ConverterProperties with FontProvider for Arial font
         ConverterProperties converterProperties = new ConverterProperties();
-        converterProperties.setBaseUri("http://localhost:8080"); // Adjust as per your app
+        FontProvider fontProvider = new DefaultFontProvider();
+        fontProvider.addDirectory(ARIAL);
+        converterProperties.setFontProvider(fontProvider);
+        // Set base URI (adjust if needed)
+        converterProperties.setBaseUri("http://localhost:8080");
 
         // 6. Convert the HTML content into the PDF document
         HtmlConverter.convertToPdf(htmlTemplate, pdfDocument, converterProperties);
@@ -83,7 +93,7 @@ public class PdfTemplateHandlerImpl implements PdfTemplateHandler {
     }
 
     @Override
-    public byte[] generatePdfLandscape(String templateName, TemplateBaseMapper templateBaseMapper) {
+    public byte[] generatePdfLandscape(String templateName, TemplateBaseMapper templateBaseMapper) throws IOException {
         Context context = new Context();
         context.setVariable("data", templateBaseMapper);
 
@@ -103,8 +113,17 @@ public class PdfTemplateHandlerImpl implements PdfTemplateHandler {
         // Set margins for landscape as well
         document.setMargins(0, 0, 0, 0); // Adjust margins as needed
 
-        // Set up the converter properties
+        // Set up the converter properties with FontProvider for Arial font
         ConverterProperties converterProperties = new ConverterProperties();
+
+        FontProvider fontProvider = new DefaultFontProvider();
+        fontProvider.addDirectory(ARIAL);
+        converterProperties.setFontProvider(fontProvider);
+
+        // Set FontProvider to ConverterProperties
+        converterProperties.setFontProvider(fontProvider);
+
+        // Set base URI
         converterProperties.setBaseUri("http://localhost:8080");
 
         // Convert the HTML to PDF using the landscape PdfDocument
