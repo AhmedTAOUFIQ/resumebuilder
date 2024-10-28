@@ -4,24 +4,120 @@
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
     <title>Profile</title>
     <link rel="stylesheet" href="/css/styles.css"/>
-    <style>
-        body {
-          font-family: Arial;
-        }
-    </style>
 </head>
 <body>
 <div class="container">
 
     <div class="header">
-        <div th:replace="fragments/profile :: profile"></div>
-        <div th:replace="fragments/education :: education"></div>
-        <div th:replace="fragments/experiences-details :: experiences-details"></div>
+        <div class="profile-container">
+            <div class="logo-container">
+                <img th:src="@{~/images/keiken.png}" alt="Keiken Logo" class="logo"/>
+            </div>
+
+            <div class="name-container">
+                <span class="name" id="name" th:text="'I am '+${data.name}">John</span>
+            </div>
+            <div class="city-container">
+                <span class="city" th:text="${data.city}">Location</span>
+            </div>
+            <div class="abstract-profile-container">
+                <p class="abstract-profile" th:text="${data.abstractProfile}">Profile description</p>
+            </div>
+        </div>
+
+        <div class="education-container">
+            <div class="certification-icons">
+                <div class="certification-image" th:each="certification : ${data.getCertificationsIcons()}">
+                    <img th:src="'/images/certifications/' + ${certification} + '.png'" th:alt="${certification}"/>
+                </div>
+            </div>
+            <div class="school-container">
+                <div class="school" th:each="education : ${data.getFacts()}"
+                     th:if="${education.factType.name() == 'education'}">
+                    <div class="school-image">
+                        <img th:src="'/images/schools/' + ${education.factTitle} + '.png'"
+                             th:alt="${education.factTitle}"/>
+                    </div>
+                    <div class="school-details">
+                        <div class="school-year">
+                            <span class="education-year"
+                                  th:text="${education.factTitle + ' | ' + education.startDate + ' - ' + education.endDate}">University Name | Date Range</span>
+                        </div>
+                        <div class="school-description">
+                            <span th:text="${education.factDescription}">Education Description</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="experiences-details-container">
+            <div class="experiences-cv-role">
+                <div class="years-experiences">
+                    <span class="years" th:text="${data.yearsExperience}">X</span>
+                </div>
+                <div class="experiences-description">
+                    <span>years in digital transformation</span>
+                </div>
+            </div>
+            <div class="project-type-details">
+                <div class="number-project-container">
+                    <span class="years" th:text="${data.projectCount}">Y</span>
+                </div>
+                <div class="experiences-description">Software architecture projects</div>
+            </div>
+            <div class="certifications-details">
+                <div class="number-certifications">
+                    <span class="years" th:text="${data.certificationCount}">O</span>
+                </div>
+                <div class="number-certifications-details">
+                    <div class="certifications-title">certifications</div>
+                    <div class="certifications-description" th:each="certification : ${data.getCertifications()}">
+                        <div th:text="${certification}"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div th:replace="fragments/technologies :: technologies"></div>
+    <table class="technologies" th:if="${data.getSkills() != null}"
+           th:with="totalSkills=${data.getSkills().size()}">
+        <TR class="skills-circle-container" th:if="${totalSkills > 0}">
+            <TD class="skills-before" th:with="halfSkills=${data.getSkills().subList(0, totalSkills / 2)}">
+                <div class="skill-circle" th:each="skill : ${halfSkills}">
+                    <div th:replace="~{/component/skill::skill(skill=${skill})}"></div>
+                </div>
+            </TD>
 
-    <div th:replace="fragments/experiences :: experiences"></div>
+            <TD class="profile-image">
+                <img src="/images/picture.png" alt="Profile Image"/>
+            </TD>
+
+            <TD class="skills-after"
+                th:with="secondHalfSkills=${data.getSkills().subList(totalSkills / 2, totalSkills)}">
+                <div class="skill-circle" th:each="skill : ${secondHalfSkills}">
+                    <div th:replace="~{/component/skill::skill(skill=${skill})}"></div>
+                </div>
+            </TD>
+        </TR>
+    </table>
+
+    <div class="experiences" th:with="totalFacts=${data.getFacts().size()},
+                                    firstHalfFacts=${data.getFacts().subList(0, totalFacts > 3 ? 3 : totalFacts)},
+                                    secondHalfFacts=${totalFacts > 3 ? data.getFacts().subList(3, totalFacts) : null}">
+
+        <div class="experience-row">
+                <div class="experience-container" th:each="experience : ${firstHalfFacts}" th:if="${experience.factType.name() == 'experience'}">
+                    <div th:replace="~{/component/experience-container :: experienceContainer(${experience})}"></div>
+                </div>
+        </div>
+
+        <div class="experience-row" th:if="${secondHalfFacts != null}">
+            <div class="experience-container" th:each="experience : ${secondHalfFacts}" th:if="${experience.factType.name() == 'experience'}">
+                <div th:replace="~{/component/experience-container :: experienceContainer(${experience})}"></div>
+            </div>
+        </div>
+    </div>
 
 </div>
 

@@ -20,7 +20,7 @@ public class PdfTemplateProcessor implements TemplateProcessor {
     public byte[] processTemplate(String templateFilename, TemplateBaseMapper data) throws IOException {
         String templateName = templateFilename.split("\\.")[0];
 
-        byte[] pdfBytes = templateHandler.generatePdfLandscape(templateName, data);
+        byte[] pdfBytes = templateHandler.generatePdf(templateName, data, false);
 
         log.info("PDF Template Process Completed");
 

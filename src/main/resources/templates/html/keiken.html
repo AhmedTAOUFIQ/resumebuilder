@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="description" content="Description of the document" />
-  <title th:text="${data.name}">Resume</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <style>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Description of the document" />
+    <title th:text="${data.name}">Resume</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
     body {
       font-family: 'Roboto', sans-serif;
       margin: 0;
@@ -86,18 +86,27 @@
       width: 50%;
     }
     .skill-bar {
-      display: inline-block;
-      width: 50%;
-      height: 10px;
-      background-color: #e0e0e0;
-      border-radius: 6px;
+        background-color: #f0f0f0;
+        height: 20px;
+        width: 100%;
+        border-radius: 5px;
     }
-    .skill-level {
-      display: block;
-      height: 100%;
-      background-color: #4B0082;
-      border-radius: 6px;
+
+    .skill-level.beginner {
+        width: 33%;
+        background-color: #4B0082;
     }
+
+    .skill-level.intermediate {
+        width: 66%;
+        background-color: #4B0082;
+    }
+
+    .skill-level.advanced {
+        width: 100%;
+        background-color: #4B0082;
+    }
+
     .company-logo img {
       width: 180px;
       object-fit: cover;
@@ -141,56 +150,57 @@
 
 <div class="resume">
 
-  <div class="left-column">
+    <div class="left-column">
 
-    <div class="header">
-      <img src="https://www.seekpng.com/png/detail/202-2024994_profile-icon-profile-logo-no-background.png" alt="Profile Photo">
-      <div style="margin-left: 20px">
-        <h1 th:text="${data.name}">Name</h1>
-        <div class="subtitle" th:text="${data.cvRole}">Job Title</div>
-      </div>
+        <div class="header">
+            <img src="https://www.seekpng.com/png/detail/202-2024994_profile-icon-profile-logo-no-background.png" alt="Profile Photo">
+            <div style="margin-left: 20px">
+                <h1 th:text="${data.name}">Name</h1>
+                <div class="subtitle" th:text="${data.cvRole}">Job Title</div>
+            </div>
+        </div>
+
+        <p th:text="${data.abstractProfile}">A brief professional summary goes here...</p>
+
+        <h2>WORK EXPERIENCE</h2>
+        <div class="section" th:each="experience, iterStat : ${data.getFacts()}" th:if="${experience.factType.name() == 'experience' && iterStat.count <= 4}">
+            <div>
+                <div class="job-title" th:text="${experience.factTitle}">Job Title</div>
+                <div class="job-details" th:text="${experience.location + ' | ' + experience.startDate + ' - ' + experience.endDate}">Company Name | Date Range</div>
+                <ul>
+                    <li th:each="line : ${#strings.listSplit(experience.factDescription, '\\.')}" th:text="${line}">Responsibility or achievement</li>
+                </ul>
+            </div>
+        </div>
+
     </div>
 
-    <p th:text="${data.abstractProfile}">A brief professional summary goes here...</p>
+    <div class="right-column">
 
-    <h2>WORK EXPERIENCE</h2>
-    <div class="section" th:each="experience, iterStat : ${data.getFacts()}" th:if="${experience.factType.name() == 'experience' && iterStat.count <= 4}">
-      <div>
-        <div class="job-title" th:text="${experience.factTitle}">Job Title</div>
-        <div class="job-details" th:text="${experience.location + ' | ' + experience.startDate + ' - ' + experience.endDate}">Company Name | Date Range</div>
-        <ul>
-          <li th:each="line : ${#strings.listSplit(experience.factDescription, '\\.')}" th:text="${line}">Responsibility or achievement</li>
-        </ul>
-      </div>
+        <h2>SKILLS</h2>
+        <div class="section">
+            <div class="skill-item" th:each="skill : ${data.getSkills()}">
+                <div th:replace="~{/component/Skills::skills(skill=${skill})}"></div>
+            </div>
+        </div>
+
+
+        <h2>CERTIFICATION</h2>
+        <div class="section">
+            <div th:each="certification : ${data.getCertifications()}">
+                <ul>
+                    <li th:text="${certification}">Certification Name</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>EDUCATION</h2>
+        <div class="section" th:each="education : ${data.getFacts()}" th:if="${education.factType.name() == 'education'}">
+            <div class="job-title" th:text="${education.factDescription}">Degree Name</div>
+            <div class="job-details" th:text="${education.factTitle + ' | ' + education.startDate + ' - ' + education.endDate}">University Name | Date Range</div>
+        </div>
+
     </div>
-
-  </div>
-
-  <div class="right-column">
-
-    <h2>SKILLS</h2>
-    <div class="section">
-      <div class="skill-item" th:each="skill : ${data.getSkills()}">
-        <div th:replace="~{/component/Skills::skills(skill=${skill}, width=70)}"></div>
-      </div>
-    </div>
-
-    <h2>CERTIFICATION</h2>
-    <div class="section">
-       <div th:each="certification : ${data.getCertifications()}">
-         <ul>
-           <li th:text="${certification}">Certification Name</li>
-         </ul>
-       </div>
-    </div>
-
-    <h2>EDUCATION</h2>
-    <div class="section" th:each="education : ${data.getFacts()}" th:if="${education.factType.name() == 'education'}">
-      <div class="job-title" th:text="${education.factDescription}">Degree Name</div>
-      <div class="job-details" th:text="${education.factTitle + ' | ' + education.startDate + ' - ' + education.endDate}">University Name | Date Range</div>
-    </div>
-
-  </div>
 </div>
 </body>
 </html>

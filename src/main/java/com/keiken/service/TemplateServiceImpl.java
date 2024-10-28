@@ -2,7 +2,7 @@ package com.keiken.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.keiken.mapper.TemplateBaseMapper;
-import com.keiken.pdfTemplateGenerator.Mapper.KeikenTemplateMapper;
+import com.keiken.pdfTemplateGenerator.Mapper.KeikenTemplateMapperPPT;
 import com.keiken.processor.TemplateProcessor;
 import com.keiken.strategy.TemplateMapperStrategy;
 import com.keiken.strategy.TemplateProcessorStrategy;
@@ -35,10 +35,10 @@ public class TemplateServiceImpl implements TemplateService {
   }
 
     @Override
-    public KeikenTemplateMapper loadResumeFromJson() throws IOException {
+    public KeikenTemplateMapperPPT loadResumeFromJson() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         File file = new File("src/main/resources/data.json");
-        return objectMapper.readValue(file, KeikenTemplateMapper.class);
+        return objectMapper.readValue(file, KeikenTemplateMapperPPT.class);
     }
 
 }

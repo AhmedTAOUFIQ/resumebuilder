@@ -7,7 +7,7 @@ import java.io.IOException;
 public interface PdfTemplateHandler {
     byte[] savePdfToFile(byte[] pdfBytes, String fileName);
 
-    byte[] generatePdf(String templateName, TemplateBaseMapper templateBaseMapper);
+    byte[] generatePdf(String templateName, TemplateBaseMapper templateBaseMapper, boolean isLandscape);
 
-    byte[] generatePdfLandscape(String templateName, TemplateBaseMapper templateBaseMapper) throws IOException;
+    //byte[] generatePdfLandscape(String templateName, TemplateBaseMapper templateBaseMapper) throws IOException;
 }

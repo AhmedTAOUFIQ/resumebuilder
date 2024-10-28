@@ -1,7 +1,7 @@
 package com.keiken.controller;
 
 import com.keiken.mapper.TemplateBaseMapper;
-import com.keiken.pdfTemplateGenerator.Mapper.KeikenTemplateMapper;
+import com.keiken.pdfTemplateGenerator.Mapper.KeikenTemplateMapperPPT;
 import com.keiken.service.TemplateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -24,12 +24,15 @@ public class ViewController {
         try {
             TemplateBaseMapper data = templateService.loadResumeFromJson();
             model.addAttribute("data", data);
-            List<TemplateBaseMapper.Fact> facts = data.getFacts(); // Assuming this is how you get the facts
-            KeikenTemplateMapper builder = new KeikenTemplateMapper();
+
+            List<TemplateBaseMapper.Fact> facts = data.getFacts();
+            KeikenTemplateMapperPPT builder = new KeikenTemplateMapperPPT();
             List<List<TemplateBaseMapper.Fact>> experienceRows = builder.buildExperienceRows(facts);
 
-// Add the grouped rows to your model
             model.addAttribute("experienceRows", experienceRows);
+
+            templateService.processTemplate("pdfHtmlTemplate.html", data);
+            //templateService.processTemplate("keiken.pptx", data);
 
         } catch (IOException e) {
             e.printStackTrace();

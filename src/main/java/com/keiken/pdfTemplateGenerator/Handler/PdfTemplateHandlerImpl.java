@@ -3,8 +3,6 @@ package com.keiken.pdfTemplateGenerator.Handler;
 import com.itextpdf.html2pdf.ConverterProperties;
 import com.itextpdf.html2pdf.HtmlConverter;
 import com.itextpdf.html2pdf.resolver.font.DefaultFontProvider;
-import com.itextpdf.io.font.FontProgram;
-import com.itextpdf.io.font.FontProgramFactory;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
@@ -18,7 +16,6 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -51,9 +48,8 @@ public class PdfTemplateHandlerImpl implements PdfTemplateHandler {
         }
         return new byte[0];
     }
-
     @Override
-    public byte[] generatePdf(String templateName, TemplateBaseMapper templateBaseMapper) {
+    public byte[] generatePdf(String templateName, TemplateBaseMapper templateBaseMapper, boolean isLandscape) {
         Context context = new Context();
         context.setVariable("data", templateBaseMapper);
 
@@ -67,17 +63,19 @@ public class PdfTemplateHandlerImpl implements PdfTemplateHandler {
         PdfWriter writer = new PdfWriter(target);
         PdfDocument pdfDocument = new PdfDocument(writer);
 
-        // 4. Prepare Document object
-        Document document = new Document(pdfDocument, PageSize.A4);
+        // 4. Set the page size (portrait or landscape) based on the isLandscape parameter
+        PageSize pageSize = isLandscape ? PageSize.A4.rotate() : PageSize.A4;
+        Document document = new Document(pdfDocument, pageSize);
 
-        // Set margins (remove or customize them as needed)
+        // Set margins (customize them as needed)
         document.setMargins(0, 0, 0, 0);
 
         // 5. Prepare ConverterProperties with FontProvider for Arial font
         ConverterProperties converterProperties = new ConverterProperties();
         FontProvider fontProvider = new DefaultFontProvider();
-        fontProvider.addDirectory(ARIAL);
+        fontProvider.addDirectory(ARIAL); // Assuming ARIAL is a constant directory path to the Arial font
         converterProperties.setFontProvider(fontProvider);
+
         // Set base URI (adjust if needed)
         converterProperties.setBaseUri("http://localhost:8080");
 
@@ -92,50 +90,4 @@ public class PdfTemplateHandlerImpl implements PdfTemplateHandler {
         return savePdfToFile(pdfBytes, UUID.randomUUID().toString());
     }
 
-    @Override
-    public byte[] generatePdfLandscape(String templateName, TemplateBaseMapper templateBaseMapper) throws IOException {
-        Context context = new Context();
-        context.setVariable("data", templateBaseMapper);
-
-        // Generate HTML from template
-        String htmlTemplate = templateEngine.process(appProperties.getTemplates().getPdfTemplatesClasspath() + templateName, context);
-
-        // Prepare the output stream for the PDF
-        ByteArrayOutputStream target = new ByteArrayOutputStream();
-
-        // Create PdfWriter and PdfDocument instances
-        PdfWriter writer = new PdfWriter(target);
-        PdfDocument pdfDocument = new PdfDocument(writer);
-
-        // Set the landscape page size
-        Document document = new Document(pdfDocument, PageSize.A4.rotate());
-
-        // Set margins for landscape as well
-        document.setMargins(0, 0, 0, 0); // Adjust margins as needed
-
-        // Set up the converter properties with FontProvider for Arial font
-        ConverterProperties converterProperties = new ConverterProperties();
-
-        FontProvider fontProvider = new DefaultFontProvider();
-        fontProvider.addDirectory(ARIAL);
-        converterProperties.setFontProvider(fontProvider);
-
-        // Set FontProvider to ConverterProperties
-        converterProperties.setFontProvider(fontProvider);
-
-        // Set base URI
-        converterProperties.setBaseUri("http://localhost:8080");
-
-        // Convert the HTML to PDF using the landscape PdfDocument
-        HtmlConverter.convertToPdf(htmlTemplate, pdfDocument, converterProperties);
-
-        // Close the document to complete the PDF creation
-        document.close();
-
-        // Convert the generated PDF to a byte array
-        byte[] pdfBytes = target.toByteArray();
-
-        // Save the PDF to a file or return the byte array
-        return savePdfToFile(pdfBytes, UUID.randomUUID().toString());
-    }
 }

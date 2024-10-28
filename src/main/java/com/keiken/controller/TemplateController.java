@@ -1,17 +1,18 @@
 package com.keiken.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.keiken.dto.TemplateRequest;
+import com.keiken.mapper.TemplateBaseMapper;
 import com.keiken.service.TemplateService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
 import java.io.IOException;
 
 @RestController
@@ -45,7 +46,5 @@ public class TemplateController {
 
         return new ResponseEntity<>(templateContent, headers, HttpStatus.OK);
     }
-
-
 
 }

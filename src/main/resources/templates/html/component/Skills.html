@@ -1,10 +1,18 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="">
 <body>
 
-<div th:fragment="skills (skill, width)">
-    <span class="skill-name" th:text="${skill}">Skill Name</span>
-    <span class="skill-bar"><span class="skill-level" th:style="${'width: '+ width + '%'}"></span></span>
+<div th:fragment="skills (skill)">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <span class="skill-name" th:text="${skill.skillName}">Skill Name</span>
+        <span class="skill-bar"
+              style="background-color: #f0f0f0; height: 20px; width: 100%; display: block; margin-top: 5px; border-radius: 5px;">
+        <span class="skill-level"
+              th:style="'background-color: #4B0082; display: block; height: 100%; border-radius: 5px; width: ' + (${skill.level == 'beginner' ? 33 : (skill.level == 'intermediate' ? 66 : 100)}) + '%'">
+        </span>
+    </span>
+    </div>
 </div>
+
 
 </body>
 </html>

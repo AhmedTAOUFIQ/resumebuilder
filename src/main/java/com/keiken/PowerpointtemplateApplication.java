@@ -24,7 +24,6 @@ public class PowerpointtemplateApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PowerpointtemplateApplication.class, args);
 	}
-
 	@Bean
 	public CommandLineRunner demo(TemplateService templateService) {
 		return (args) -> {
@@ -32,7 +31,7 @@ public class PowerpointtemplateApplication {
 			File jsonFile = new ClassPathResource("data.json").getFile();
 			TemplateBaseMapper templateData = objectMapper.readValue(jsonFile, TemplateBaseMapper.class);
 
-			templateService.processTemplate("pdfHtmlTemplate.html", templateData);
+			templateService.processTemplate("keiken.html", templateData);
 		};
 	}
 }

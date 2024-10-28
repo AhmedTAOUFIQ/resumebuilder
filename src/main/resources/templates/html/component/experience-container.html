@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+<body>
+<!-- experience-container.html -->
+<div th:fragment="experienceContainer(experience)">
+  <style>
+    .experience-dates {
+    font-weight: bold;
+    color: #36597c;
+    font-size: 14px;
+}
+
+.experience-location,
+.experience-description,
+.experience-technologies {
+    margin-bottom: 10px;
+}
+.experience-location {
+    font-size : 12px;
+    font-style: italic;
+}
+
+.experience-description {
+    font-size: 12px;
+    color: #333;
+}
+.experience-technologies > span{
+    font-size : 12px;
+    font-weight : bold;
+}
+.experience-skills {
+    font-size: 12px;
+    display: inline-block;
+    margin-left: 5px;
+}
+
+  </style>
+  <div class="experience-dates">
+    <span th:text="${experience.factTitle + ' | ' + experience.startDate + ' - ' + experience.endDate}"></span>
+  </div>
+  <div class="experience-location">
+    <span th:text="${experience.location + ' | ' + experience.city}"></span>
+  </div>
+  <div class="experience-description" th:text="${experience.factDescription}">Job description</div>
+  <div class="experience-technologies">
+    <span>Technologies :</span>
+    <div class="experience-skills" th:each="skill : ${experience.linkedSkills}">
+      <span th:text="${skill.skillName}">List of technologies</span>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
