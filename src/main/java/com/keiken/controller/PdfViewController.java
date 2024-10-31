@@ -1,6 +1,7 @@
 package com.keiken.controller;
 
 import com.keiken.mapper.TemplateBaseMapper;
+import com.keiken.openai.service.SummaryService;
 import com.keiken.pdfTemplateGenerator.Mapper.KeikenTemplateMapperPPT;
 import com.keiken.service.TemplateService;
 import lombok.RequiredArgsConstructor;
@@ -15,15 +16,20 @@ import java.util.List;
 @Controller
 @RequestMapping("/api")
 @RequiredArgsConstructor
-public class ViewController {
+public class PdfViewController {
 
     private final TemplateService templateService;
+    private final SummaryService summaryService;
 
     @GetMapping("/view")
     public String viewResume(Model model) {
         try {
             TemplateBaseMapper data = templateService.loadResumeFromJson();
             model.addAttribute("data", data);
+
+            String abstractProfile=data.getAbstractProfile();
+            String summarizedAbstractProfile=summaryService.getSummary(abstractProfile,20);
+            data.setAbstractProfile(summarizedAbstractProfile);
 
             List<TemplateBaseMapper.Fact> facts = data.getFacts();
             KeikenTemplateMapperPPT builder = new KeikenTemplateMapperPPT();
@@ -32,7 +38,6 @@ public class ViewController {
             model.addAttribute("experienceRows", experienceRows);
 
             templateService.processTemplate("pdfHtmlTemplate.html", data);
-            //templateService.processTemplate("keiken.pptx", data);
 
         } catch (IOException e) {
             e.printStackTrace();

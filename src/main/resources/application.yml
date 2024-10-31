@@ -12,8 +12,8 @@ spring:
       ppt-output-path: output/ppt/
       pdf-templates-classpath: /
       pdf-output-path: output/pdf/
-      images-classpath: images/
+      images-classpath: static/images/
     openai-api:
-      key: 
+      key: API_KEY
       url: https://api.openai.com/v1/chat/completions
       model: gpt-3.5-turbo-1106

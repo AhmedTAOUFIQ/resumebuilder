@@ -4,6 +4,7 @@ import com.keiken.config.AppProperties;
 import com.keiken.mapper.TemplateBaseMapper;
 import com.keiken.openai.service.SummaryService;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.sl.usermodel.PictureData;
 import org.apache.poi.xslf.usermodel.*;
 import org.apache.xmlbeans.XmlCursor;
@@ -43,6 +44,7 @@ public class PPTemplateHandlerImpl implements PPTemplateHandler {
         InputStream inputStream = resource.getInputStream();
         return new XMLSlideShow(inputStream);
     }
+
     @Override
     public byte[] saveAndCloseTemplate(XMLSlideShow ppt) throws IOException {
         String filename = UUID.randomUUID().toString();
@@ -75,6 +77,7 @@ public class PPTemplateHandlerImpl implements PPTemplateHandler {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        //System.out.println("Found Alt Text (Placeholder): " + altText);
         return altText;
     }
 
@@ -94,12 +97,12 @@ public class PPTemplateHandlerImpl implements PPTemplateHandler {
     }
 
     @Override
-    public void replacePictureShape(XSLFPictureShape oldPictureShape, String newPicturePath, String fallbackImagePath)  {
+    public void replacePictureShape(XSLFPictureShape oldPictureShape, String newPicturePath, String fallbackImagePath) {
         try {
             // Load the new image from the resources folder
             Resource resource = new ClassPathResource(newPicturePath);
 
-            if(!resource.exists()) {
+            if (!resource.exists()) {
                 resource = new ClassPathResource(fallbackImagePath);
             }
 
@@ -132,44 +135,64 @@ public class PPTemplateHandlerImpl implements PPTemplateHandler {
     }
 
     @Override
-    public <Obj> void fillTextPlaceholders(XSLFTextParagraph textParagraph, Obj dataObject, int textMaxWords) {
-        // Retrieve the text from the shape and replace placeholders
+    public <Obj> void fillTextPlaceholders(XSLFTextParagraph textParagraph, Obj dataObject, int defaultTextMaxWords) {
         for (XSLFTextRun textRun : textParagraph.getTextRuns()) {
             String text = textRun.getRawText();
-
-            // Get fields of the class and its super class
-            List<Field> fields = new ArrayList<>(Arrays.stream(dataObject.getClass().getDeclaredFields()).toList());
+            // Initialize the word limit based on default value
+            int textMaxWords = defaultTextMaxWords;
+            // Use reflection to replace placeholders with values from dataObject
+            List<Field> fields = new ArrayList<>(Arrays.asList(dataObject.getClass().getDeclaredFields()));
             Class<?> superClass = dataObject.getClass().getSuperclass();
-            if(superClass != null) {
-                List<Field> superFields = Arrays.stream(superClass.getDeclaredFields()).toList();
-                fields.addAll(superFields);
+            if (superClass != null) {
+                fields.addAll(Arrays.asList(superClass.getDeclaredFields()));
             }
 
-            for(Field field : fields) {
+            boolean hasMaxWords = false;
+            for (Field field : fields) {
+
+                if (text != null && text.startsWith(field.getName() + ",")) {
+                    hasMaxWords = true;
+                    textMaxWords = getMaxWords(text);
+                }
+
                 try {
                     field.setAccessible(true);
-
                     Object value = field.get(dataObject);
+                    String replacement = value != null ? value.toString() : "";
 
-                    if(value instanceof List<?> list && !list.isEmpty()) {
-                            String skills = list.stream()
-                                    .map(Object::toString)
-                                    .collect(Collectors.joining(", "));
+                    replacement = getSummarizedText(replacement, textMaxWords, hasMaxWords);
 
-                            text = text.replaceAll("\\b" + field.getName() + "\\b", skills);
-                    } else {
-                        String replacement = value != null ? value.toString() : "";
-                        if (replacement.split(" ").length > textMaxWords) {
-                            replacement = summaryService.getSummary(replacement, textMaxWords);
-                        }
-                        text = text.replaceAll("\\b" + field.getName() + "\\b", replacement);
-                    }
+                    String originalText = hasMaxWords ? field.getName() + "," + textMaxWords : field.getName();
+                    text = text.replaceAll("\\b" + originalText + "\\b", replacement);
+
+                    hasMaxWords = false;
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
             textRun.setText(text);
+
         }
+    }
+
+    private String getSummarizedText(String text, int maxWords, boolean hasMaxWords) {
+
+        if (hasMaxWords && text.split(" ").length > maxWords) {
+            text = summaryService.getSummary(text, maxWords);
+        }
+        return text;
+    }
+
+    private Integer getMaxWords(String string) {
+        Integer textMaxWords = 0;
+        try {
+            // Parse the word limit for abstractProfile from Alt Text
+            String[] altTextParts = string.split(",");
+            textMaxWords = Integer.parseInt(altTextParts[1]);
+        } catch (NumberFormatException e) {
+            e.printStackTrace(); // Handle any parsing errors
+        }
+        return textMaxWords;
     }
 
     @Override
@@ -183,12 +206,12 @@ public class PPTemplateHandlerImpl implements PPTemplateHandler {
         int index = 0;
         for (XSLFPictureShape pictureShape : shapesToReplace) {
             // Remove unnecessary placeholders
-            if(index >= imagesList.length) {
-                String altText =getAltText(pictureShape);
+            if (index >= imagesList.length) {
+                String altText = getAltText(pictureShape);
                 removeShapeByAltText(slide, altText);
                 continue;
             }
-           replacePictureShape(
+            replacePictureShape(
                     pictureShape,
                     folderPath + imagesList[index++].toLowerCase() + ".png",
                     folderPath + fallbackImage
@@ -197,11 +220,11 @@ public class PPTemplateHandlerImpl implements PPTemplateHandler {
     }
 
     @Override
-    public void fillTable(XSLFTable table, List<TemplateBaseMapper.Fact> facts, int textMaxWords)  {
+    public void fillTable(XSLFTable table, List<TemplateBaseMapper.Fact> facts, int textMaxWords) {
         int factIndex = 0;
         for (XSLFTableRow tableRow : table.getRows()) {
             for (XSLFTableCell tableCell : tableRow.getCells()) {
-                if(factIndex > facts.size()){
+                if (factIndex > facts.size()) {
                     break;
                 }
                 TemplateBaseMapper.Fact fact = facts.get(factIndex);
@@ -266,6 +289,3 @@ public class PPTemplateHandlerImpl implements PPTemplateHandler {
         return path;
     }
 }
-
-
-
