@@ -17,22 +17,22 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class TemplateServiceImpl implements TemplateService {
 
-  private final TemplateMapperStrategy templateMapperStrategy;
-  private final TemplateProcessorStrategy templateProcessorStrategy;
+    private final TemplateMapperStrategy templateMapperStrategy;
+    private final TemplateProcessorStrategy templateProcessorStrategy;
 
-  public byte[] processTemplate(String templateFilename, TemplateBaseMapper data) throws IOException {
+    public byte[] processTemplate(String templateFilename, TemplateBaseMapper data, boolean isLandscape) throws IOException {
 
-      TemplateProcessor templateProcessor = templateProcessorStrategy.getProcessor(templateFilename);
-      TemplateBaseMapper mapper = templateMapperStrategy.getMapper(templateFilename);
+        TemplateProcessor templateProcessor = templateProcessorStrategy.getProcessor(templateFilename);
+        TemplateBaseMapper mapper = templateMapperStrategy.getMapper(templateFilename);
 
-      if(mapper != null) {
-          BeanUtils.copyProperties(data, mapper);
-          mapper.setProps();
-          data = mapper;
-      }
+        if (mapper != null) {
+            BeanUtils.copyProperties(data, mapper);
+            mapper.setProps();
+            data = mapper;
+        }
 
-      return templateProcessor.processTemplate(templateFilename, data);
-  }
+        return templateProcessor.processTemplate(templateFilename, data, isLandscape);
+    }
 
     @Override
     public KeikenTemplateMapperPPT loadResumeFromJson() throws IOException {

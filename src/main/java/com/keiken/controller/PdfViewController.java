@@ -37,13 +37,13 @@ public class PdfViewController {
 
             model.addAttribute("experienceRows", experienceRows);
 
-            templateService.processTemplate("pdfHtmlTemplate.html", data);
+            templateService.processTemplate("keiken.html", data, true);
 
         } catch (IOException e) {
             e.printStackTrace();
             model.addAttribute("error", "Could not load the resume data.");
         }
 
-        return "pdfHtmlTemplate";
+        return "keiken";
     }
 }

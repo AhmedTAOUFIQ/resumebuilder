@@ -3,6 +3,7 @@ package com.keiken.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.keiken.dto.TemplateRequest;
 import com.keiken.mapper.TemplateBaseMapper;
+import com.keiken.openai.service.SummaryService;
 import com.keiken.service.TemplateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ClassPathResource;
@@ -21,12 +22,14 @@ import java.io.IOException;
 public class TemplateController {
 
     private final TemplateService templateService;
+    private final SummaryService summaryService;
 
-    @PostMapping("pptemplate")
-    public ResponseEntity<byte[]> createPPTemplate(@RequestBody TemplateRequest templateRequest) throws IOException {
+    @PostMapping("pptTemplate")
+    public ResponseEntity<byte[]> createPPTemplate(boolean isLandscape,@RequestBody TemplateRequest templateRequest) throws IOException {
         byte[] pptxData = templateService.processTemplate(
                 templateRequest.templateName() + ".pptx",
-                templateRequest.data()
+                templateRequest.data(),
+                isLandscape
         );
 
         return ResponseEntity.ok()
@@ -34,12 +37,20 @@ public class TemplateController {
                 .body(pptxData);
     }
 
-    @PostMapping("pdftemplate")
-    public ResponseEntity<byte[]> createPdfTemplate(@RequestBody TemplateRequest templateRequest) throws IOException {
+    @PostMapping("pdfTemplate")
+    public ResponseEntity<byte[]> createPdfTemplate(boolean isLandscape,@RequestBody TemplateRequest templateRequest) throws IOException {
+
+        String abstractProfile = templateRequest.data().getAbstractProfile();
+        String summarizedAbstractProfile = summaryService.getSummary(abstractProfile, 20);
+        templateRequest.data().setAbstractProfile(summarizedAbstractProfile);
+
         byte[] templateContent = templateService.processTemplate(
                 templateRequest.templateName() + ".html",
-                templateRequest.data()
+                templateRequest.data(),
+                isLandscape
         );
+
+
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_PDF);
         headers.setContentDispositionFormData("attachment", templateRequest.templateName() + ".pdf");

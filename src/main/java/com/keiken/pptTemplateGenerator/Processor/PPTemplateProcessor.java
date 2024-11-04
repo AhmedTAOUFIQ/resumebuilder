@@ -29,7 +29,7 @@ public class PPTemplateProcessor implements TemplateProcessor {
 
 
     @Override
-    public byte[] processTemplate(String templateFilename, TemplateBaseMapper data) {
+    public byte[] processTemplate(String templateFilename, TemplateBaseMapper data, boolean isLandscape) {
         try {
             // --> Load Template
             XMLSlideShow ppt = templateHandler.loadTemplate(templateFilename);

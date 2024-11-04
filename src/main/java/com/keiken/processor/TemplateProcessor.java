@@ -5,5 +5,5 @@ import com.keiken.mapper.TemplateBaseMapper;
 import java.io.IOException;
 
 public interface TemplateProcessor {
-    byte[] processTemplate(String templateFilename, TemplateBaseMapper mapper) throws IOException;
+    byte[] processTemplate(String templateFilename, TemplateBaseMapper mapper, boolean isLandscape) throws IOException;
 }

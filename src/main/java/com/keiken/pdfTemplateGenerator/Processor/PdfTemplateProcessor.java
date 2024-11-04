@@ -17,10 +17,10 @@ public class PdfTemplateProcessor implements TemplateProcessor {
     private final PdfTemplateHandler templateHandler;
 
     @Override
-    public byte[] processTemplate(String templateFilename, TemplateBaseMapper data) throws IOException {
+    public byte[] processTemplate(String templateFilename, TemplateBaseMapper data, boolean isLandscape) throws IOException {
         String templateName = templateFilename.split("\\.")[0];
 
-        byte[] pdfBytes = templateHandler.generatePdf(templateName, data, true);
+        byte[] pdfBytes = templateHandler.generatePdf(templateName, data, isLandscape);
 
         log.info("PDF Template Process Completed");
 
